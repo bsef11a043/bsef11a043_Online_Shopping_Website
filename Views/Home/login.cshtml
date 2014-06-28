@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "login";
+    Layout = "Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('#search_box').hide();
+    });
+</script>
+@model OnlineShoppingWebsite.Models.Client
+<h2>Login</h2>
+@using (Html.BeginForm("loginClient","Home",FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+@*<form action="/Home/loginClient" method="post">*@
+    <table>
+        <tr><td>Username</td>
+            <td>@Html.EditorFor(model => model.username)</td>
+            <td>@Html.ValidationMessageFor(model=>model.username)</td>
+            @*<td><input type="text" value="" name="username" size="10" class="input_field" /></td>*@
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                @Html.EditorFor(model => model.password)
+                @*<input type="password" value="" name="password" class="input_field" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(model=>model.password)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="login" value="Login" alt="Login" id="submit_btn" /></td>
+        </tr>
+        </table>
+@*</form>*@
+}
+@Scripts.Render("~/bundles/jqueryval")

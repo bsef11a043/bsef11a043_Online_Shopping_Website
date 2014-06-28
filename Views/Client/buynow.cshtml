@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "buynow";
+    Layout = "Layout.cshtml";
+}
+
+<form method="post" action="/Client/addToCart?id=@Model.Id">
+    Quantity
+    <input type="text" name="quantity" class="input_field"/>
+    <input type="submit" value="Ok" id="submit_btn" />
+</form>

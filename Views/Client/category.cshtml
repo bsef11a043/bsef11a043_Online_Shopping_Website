@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "category";
+    Layout = "Layout.cshtml";
+}
+@model List<OnlineShoppingWebsite.Models.Product>
+
+@foreach(var x in Model)
+{
+<div class="product_box margin_r35">
+        <h3>@x.productName</h3>
+        <div class="image_wrapper"> <img src="@x.imagepath.Substring(1)" alt="" width="190" height="150"/> </div>
+        <p class="price">Price: @x.price</p>
+        <p>Comapany Name: @x.companyName</p> | <a href="/Client/buynow?id=@x.Id">Add To Cart</a>
+
+</div>
+}

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "update";
+}
+@{
+    Layout = "Layout.cshtml";
+}
+
+@model OnlineShoppingWebsite.Models.Product
+<h2>Update Product Info</h2>
+
+@using (Html.BeginForm("updateInfo","Admin",FormMethod.Post))
+{
+       @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <table class="editor-field">
+        @Html.HiddenFor(model => model.Id)
+        @*<tr>
+            <td>Product Id</td>
+            <td>@Model.Id</td>
+        </tr>*@
+        <tr>
+            <td>
+                Product Name
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.productName)
+                @*<input type="text" id="productname" name="productName" class="input_field" value="@Model.productName" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(mode=>Model.productName)</td>
+        </tr>
+        <tr>
+            <td>
+                Quantity
+            </td>
+            <td>
+                @Html.EditorFor(mode=>Model.quantity)
+                @*<input type="text" id="quantity" name="quantity" class="input_field" value="@Model.quantity"/>*@
+            </td>
+            <td>@Html.ValidationMessageFor(model=>model.quantity)</td>
+        </tr>
+        <tr>
+            <td>
+                Product Price
+            </td>
+            <td>
+                @Html.EditorFor(model=> model.price)
+                @*<input type="text" id="price" name="price" class="input_field" value="@Model.price"/>*@
+            </td>
+            <td>@Html.ValidationMessageFor(model=>model.price)</td>
+        </tr>
+        <tr>
+            <td>
+                Company Name
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.companyName)
+                @*<input type="text" id="companyname" name="companyName" class="input_field" value="@Model.companyName"/>*@
+            </td>
+            <td>@Html.ValidationMessageFor(mode=>Model.companyName)</td>
+        </tr>
+        <tr>
+            <td>
+                Category
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.category)
+                @*<input type="text" id="category" name="category" class="input_field" value="@Model.category"/>*@
+            </td>
+            <td>@Html.ValidationMessageFor(model=>model.category)</td>
+        </tr>
+        <tr>
+            <td>
+                Image Path
+            </td>
+            <td>
+                @Html.EditorFor(model=>Model.imagepath)
+                @*<input type="text" id="imagepath" name="imagepath" class="input_field" value="@Model.imagepath"/>*@
+            </td>
+            <td>@Html.ValidationMessageFor(model=>model.imagepath)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="Update" value="Update"/></td>
+        </tr>
+    </table>
+
+}
+@Scripts.Render("~/bundles/jqueryval")

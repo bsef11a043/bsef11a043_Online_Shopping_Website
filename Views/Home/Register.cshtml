@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+@{
+    Layout = "Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $('#search_box').hide();
+    });
+</script>
+@model OnlineShoppingWebsite.Models.Client
+<h2>Register Yourself</h2>
+@*<div>
+
+   <div class="conten_section">
+            <form action="/Home/RegisterClient" method="post">
+                <div id="checking">Checking...</div>
+                <div>
+            <table >
+            <tr>
+                
+                <td>Enter Username: </td>
+                <td><input type="text" name="username" class="input_field" /></td>
+                <td><input type="button" id="btn" class="input_field" value="Check"/></td>
+                
+            </tr>
+                <tr>
+                    <td id="result"></td>
+                </tr>
+            <tr>
+                <td>Enter Password: </td>
+                <td><input type="text" name="password" id="pwd" class="input_field" /></td>
+            </tr>
+            <tr>
+                <td>Enter Email Address: </td>
+                <td>
+                    <input type="text" name="email" class="input_field"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Credit Card Number: </td>
+                <td>
+                    <input type="text" name="creditCardNo" class="input_field" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Register" id="submit_btn" name="register" />
+                </td>
+            </tr>
+        </table>
+              </div>  
+    
+         </form>
+      </div>
+    
+</div>
+*@
+
+
+<div id="checking">Checking...</div>
+@using (Html.BeginForm("RegisterClient","Home",FormMethod.Post)) {
+     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+@*<form action="/Home/RegisterClient" method="post">*@
+
+     <table>
+         <tr><td id="result"></td></tr>
+         <tr>
+             <td>
+                 Enter Username
+             </td>
+             <td>
+                 @Html.EditorFor(model =>Model.username)
+                 @*<input type="text" name="username" id="username" class="input_field" />*@
+             </td>
+             <td>
+                 @Html.ValidationMessageFor(model=> model.username)
+             </td>
+             <td>
+                 <input type="button" id="b1" value="Check" />
+             </td>
+         </tr>
+       
+     
+    @*<div id="result"></div>*@
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+
+        $(document).ready(function () {
+
+            $('#checking').hide();
+
+            $('#b1').click(function () {
+
+                var userName = $('#username').val();
+
+                //alert('User Name ='+ userName);
+                $('#checking').show();
+                $.getJSON("/home/CheckUserName?username=" + userName, function (data) {
+                    $('#checking').hide();
+                    if (data) {
+                        $('#result').text("User already exists in database");
+
+                    }
+                    else {
+                        $('#result').text("User Name is available");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+    
+        <tr>
+            <td>
+                Enter Password
+            </td>
+            <td>
+                @Html.EditorFor(model =>model.password)
+                @*<input type="text" name="password" id="password" class="input_field" />*@
+            </td>
+            <td>
+                @Html.ValidationMessageFor(model=>model.password)
+            </td>
+        </tr>
+     <tr>
+         <td>
+            Enter Email Address
+         </td>
+         <td>
+             @Html.EditorFor(mode => Model.email)
+             @*<input type="text" name="email" id="email" class="input_field" />*@
+         </td>
+         <td>
+             @Html.ValidationMessageFor(model=>model.email)
+         </td>
+     </tr>
+     <tr>
+         <td>
+             Enter Credit Card Number
+         </td>
+         <td>
+             @Html.EditorFor(model => model.creditCardNo)
+             @*<input type="text" name="creditCardNo" id="cc" class="input_field" />*@
+         </td>
+         <td>
+             @Html.ValidationMessageFor(model=>model.creditCardNo)
+         </td>
+     </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit"value="Register" id="submit_btn" name="register"/>
+        </td>
+    </tr>
+    
+        </table>@*
+      
+        
+      </form>*@
+}
+    @Scripts.Render("~/bundles/jqueryval")
+

@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "Layout";
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Online Shopping Website</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/stylesheet/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+function clearText(field) {
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+    <script src="~/Scripts/slideitmoo-1.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/mootools-1.2.1-core.js" type="text/javascript"></script>
+    <script src="~/Scripts/mootools-1.2-more.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.7.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+window.addEvents({
+    'domready': function () { /* thumbnails example , div containers */
+        new SlideItMoo({
+            overallContainer: 'SlideItMoo_outer',
+            elementScrolled: 'SlideItMoo_inner',
+            thumbsContainer: 'SlideItMoo_items',
+            itemsVisible: 5,
+            elemsSlide: 3,
+            duration: 200,
+            itemsSelector: '.SlideItMoo_element',
+            itemWidth: 140,
+            showControls: 1
+        });
+    }
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+  <div id="menu">
+    <ul>
+      <li><a href="/Home/index" class="current"><span></span>Home</a></li>
+      @*<li><a href="/Home/Cart"><span>Cart</span></a></li>*@
+        <li><a href="/Home/Contact" ><span></span>Contact</a></li>
+    </ul>
+  </div>
+  <!-- end of menu -->
+  <div id="header_bar">
+    <div id="header">
+      <div class="right"></div>
+      <h1><a href="/Home/index"> <img src="~/Images/logo.png" alt="logo"/> <span>Online Shopping Website</span> </a></h1>
+    </div>
+
+<div id="search_box">
+
+    <input type="text" value="Enter keyword here..." name="q" size="10" id="searchfield" onfocus="clearText(this)" onblur="clearText(this)" /> 
+    <input type="submit" name="Search" value="" alt="Search" id="searchbutton" />
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+
+        $(document).ready(function () {
+            $('#searchbutton').click(function () {
+                $('#d1').hide();
+                var userName = $('#searchfield').val();
+                alert(userName);
+                $.getJSON("/home/search?search=" + userName, function (data)
+                {
+                    $.each(data, function (i, item) {
+
+                        $('#table').append('<tr><td>Product Name</td><td>' + item.productName + '</td></tr>' +'<tr><td>Product Price</td><td>'+item.price+'</td></tr>'+'<tr><td>Company Name</td><td>'+item.companyName+'</td></tr>');
+                        //$('#d2').append('<div class="product_box margin_r35"> <h3>' + item.productName + '</h3>' + '<div class="image_wrapper"><img src="' + item.imagepath.Substring(1) + '"/></div>'
+                        //    + '<p class="price">Price: ' + item.price + '</p>' + '<p>Company Name: ' + item.companyName + '</p>' + '<a href="/Home/Cart">Add to Cart</a></div>');
+                        //@*<div class="product_box margin_r35">
+        <h3>@x.productName</h3>
+        <div class="image_wrapper"> <img src="@x.imagepath.Substring(1)" alt="" /> </div>
+        <p class="price">Price: @x.price</p>
+        <p>Comapany Name: @x.companyName</p> | <a href="/Home/Cart">Add To Cart</a>
+
+                </div>*@
+                    });
+                });
+
+            });
+
+        });
+    </script>
+</div>
+    @*<div id="search_box">
+      <form action="/Home/search" method="post">
+        
+        
+      </form>
+    </div>*@
+  </div>
+  <!-- end of header_bar -->
+  <div class="cleaner"></div>
+  <div id="sidebar">
+    <div class="sidebar_top"></div>
+    <div class="sidebar_bottom"></div>
+    <div class="sidebar_section">
+      <h2>Members</h2>
+        <a href="/Home/login"><h3>Login</h3></a>
+        <br />
+      <a href="/Home/Register"><h3>Register</h3></a>
+      <div class="cleaner"></div>
+    </div>
+    <div class="sidebar_section">
+      <h2>Categories</h2>
+      <ul class="categories_list">
+        <li><a href="/Home/category?id=1">Clothes</a></li>
+        <li><a href="/Home/category?id=2">Shoes</a></li>
+        <li><a href="/Home/category?id=3">Mobiles</a></li>
+        <li><a href="/Home/category?id=4">Electronics</a></li>
+        <li><a href="/Home/category?id=5">Books</a></li>
+        <li><a href="/Home/category?id=6">MotorBike & Cars</a></li>
+      </ul>
+    </div>
+        <div class="sidebar_section">
+      <h2>Discounts</h2>
+      <div class="image_wrapper"><a href="#">
+          <img src="~/Images/image_01.jpg" /></a></div>
+      <div class="discount"><span>25% off</span> | <a href="#">Read more</a></div>
+    </div>
+  </div>
+  <!-- end of sidebar -->
+  <div id="content">
+    <div id="latest_product_gallery">
+      <h2>Featured Products</h2>
+      <div id="SlideItMoo_outer">
+        <div id="SlideItMoo_inner">
+          <div id="SlideItMoo_items">
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/ipod.jpg" alt=""/></a> </div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_01.png" alt=""/></a> </div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_08.png" alt=""/> </a></div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_08.png" alt=""/> </a></div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/small7.jpg" alt=""/> </a></div>
+              <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_03.png" alt=""/></a> </div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_04.png" alt=""/></a> </div>
+            <div class="SlideItMoo_element"> <a href="#"> <img src="~/Images/product_05.png" alt=""/> </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of latest_content_gallery -->
+    <div class="content_section">
+      <h2>Welcome to Online Shopping Site</h2>
+      <p>This site is developed by Amreena Sabir as a term project in the course of Enterprise Application Development at Punjab University.
+          <br />
+          <a href="/Home/Contact">Contact</a> me for further details
+      </p>
+    </div>
+      <div id="d2">
+          <table id="table">
+
+          </table>
+      </div>
+    <div class="content_section" id="d1">
+      
+        @RenderBody()
+        <div class="cleaner"></div>
+    </div>
+  </div>
+  <!-- end of content -->
+</div>
+<!-- end of wrapper -->
+<div id="footer_wrapper" style="margin-top:600px">
+  <div id="footer">
+    <ul class="footer_menu">
+      <li><a href="/Home/index">Home</a></li>
+      <li class="last_menu"><a href="/Home/Contact">Contact</a></li>
+    </ul>
+    Created By Amreena Sabir</div>
+  <!-- end of footer -->
+</div>
+<!-- end of footer_wrapper -->
+</body>
+</html>
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+

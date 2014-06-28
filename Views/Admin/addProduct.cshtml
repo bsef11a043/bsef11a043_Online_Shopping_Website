@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "addProduct";
+    Layout = "Layout.cshtml";
+}
+
+@model OnlineShoppingWebsite.Models.Product
+<h2>Add Products</h2>
+
+@using (Html.BeginForm("add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <table>
+        
+        <tr>
+            <td>
+                Product Name
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.productName)
+                @*<input type="text" id="productname" name="productName" class="input_field" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(model => model.productName)</td>
+        </tr>
+        <tr>
+            <td>
+                Quantity
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.quantity)
+                @*<input type="text" id="quantity" name="quantity" class="input_field" />*@
+            </td>
+            <td>
+                @Html.ValidationMessageFor(model => model.quantity)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Product Price
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.price)
+                @*<input type="text" id="price" name="price" class="input_field" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(model => model.price)</td>
+        </tr>
+        <tr>
+            <td>
+                Company Name
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.companyName)
+                @*<input type="text" id="companyname" name="companyName" class="input_field" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(model => model.companyName)</td>
+        </tr>
+        <tr>
+            <td>
+                Category
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.category)
+                @*<input type="text" id="category" name="category" class="input_field" />*@
+            </td>
+            <td>@Html.ValidationMessageFor(model => model.category)</td>
+        </tr>
+       @* <tr>
+            <td>
+                Image Path
+            </td>
+            <td>
+                <input type="text" id="imagepath" name="imagepath" class="input_field" />
+            </td>
+        </tr>*@
+        @*<form action="/home/save" method="post" enctype="multipart/form-data" >
+
+    Upload Image: <input type="file" name="image" />
+ 
+     
+ 
+    <input type="submit" value="upload" />
+</form>*@
+        <tr>
+            <td>Upload Image</td>
+            @*<td>@Html.TextBoxFor(model=>model.imagepath)</td>*@
+                <td><input type="file" name="image" /> </td>
+            @*<td>@Html.ValidationMessageFor(model => model.imagepath)</td>*@
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" name="Add" value="Add"/></td>
+        </tr>
+    </table>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
